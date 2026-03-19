@@ -1,0 +1,57 @@
+# ------------------------------
+# OS-generated files
+# ------------------------------
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ------------------------------
+# VS Code
+# ------------------------------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/*.code-snippets
+
+# VS Code test artifacts
+.vscode-test/
+
+# ------------------------------
+# IntelliJ / JetBrains IDEs
+# ------------------------------
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# JetBrains local history / caches
+out/
+
+# ------------------------------
+# Editor swap / temp files
+# ------------------------------
+*.swp
+*.swo
+*~
+
+# Maven
+/target/
+
+# Environment
+.env

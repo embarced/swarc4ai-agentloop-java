@@ -51,7 +51,8 @@ Inhaltlich:
 Testidee:
 - App starten
 - Prüfen, ob der Agent mehrere Schritte ausführt
-- Beobachten, dass `Main.java` erstellt, kompiliert und ausgeführt wird
+- Beobachten, dass der Agent den Ordner `HelloWorld` anlegt
+- Beobachten, dass darin `Main.java` erstellt, kompiliert und ausgeführt wird
 
 ### 2) Referenzlösung: `main`
 
@@ -90,7 +91,7 @@ git checkout <branch-name>
 
 ## Wichtige Datei
 - `src/main/java/com/example/AgentLoop.java`
-  - System Prompt, Tool-Methoden, Spring-AI-Aufruf, Loop und History-Update
+  - System Prompt, Tool-Methoden, Spring-AI-Aufruf, Loop, History-Update und Aufgabenstellung
 
 ## Abschluss
 Wenn ihr die TODOs in `ex1` gelöst habt, vergleicht mit:

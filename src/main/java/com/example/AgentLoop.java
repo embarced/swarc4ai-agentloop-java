@@ -118,42 +118,13 @@ public class AgentLoop {
         while (steps < 15) {
             steps++;
 
-            ChatCompletionRequest request = ChatCompletionRequest.builder()
-                    .model("gpt-4o")
-                    .messages(messages)
-                    .responseFormat(new ChatCompletionRequest.ChatCompletionRequestResponseFormat("json_object"))
-                    .build();
+            // TODO: ÜBUNG 1 - Erstelle einen ChatCompletionRequest mit Modell, Messages und JSON-Response-Format.
+            // TODO: ÜBUNG 1 - Rufe das LLM über den OpenAiService auf und speichere die Antwort als ChatMessage.
+            // TODO: ÜBUNG 1 - Lies den Content aus der LLM-Antwort aus.
+            // SO PRÜFST DU ES: Starte das Programm. Der Agent sollte mehrere Schritte ausführen, eine Datei
+            // 'Main.java' erzeugen, sie kompilieren und am Ende 'Hallo Welt aus Java' ausgeben.
+            throw new UnsupportedOperationException("ÜBUNG 1: Implementiere den LLM-Aufruf und das Auslesen der Antwort.");
 
-            ChatMessage responseMessage = service.createChatCompletion(request).getChoices().get(0).getMessage();
-            String content = responseMessage.getContent();
-
-            try {
-                AgentAction actionData = mapper.readValue(content, AgentAction.class);
-
-                System.out.println("\n[Gedanke]: " + actionData.thought);
-
-                if ("finish".equals(actionData.action)) {
-                    System.out.println("Fertig!");
-                    break;
-                }
-
-                String toolResult;
-                switch (actionData.action) {
-                    case "run_shell" -> toolResult = runShell(actionData.args.get("command"));
-                    case "read_file" -> toolResult = readFile(actionData.args.get("path"));
-                    case "write_file" -> toolResult = writeFile(actionData.args.get("path"), actionData.args.get("content"));
-                    default -> toolResult = "Fehler: Unbekanntes Tool " + actionData.action;
-                }
-
-                String displayResult = toolResult.length() > 100 ? toolResult.substring(0, 100) + "..." : toolResult;
-                System.out.println("   [Ergebnis]: " + displayResult);
-
-                messages.add(responseMessage);
-                messages.add(new ChatMessage(ChatMessageRole.USER.value(), "Tool Output: " + toolResult));
-            } catch (Exception e) {
-                System.err.println("JSON Parsing Fehler oder Ausnahmefehler: " + e.getMessage());
-                System.err.println("Raw Content: " + content);
-            }
         }
 
         service.shutdownExecutor();

@@ -1,6 +1,8 @@
 spring:
   application:
     name: agentic-loop-exercise
+  main:
+    web-application-type: none
   ai:
     openai:
       api-key: ${OPENAI_API_KEY}

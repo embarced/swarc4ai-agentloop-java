@@ -116,7 +116,7 @@ public class AgentLoop implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        String aufgabe = "Erstelle eine Datei 'Main.java', die 'Hallo Welt aus Java' ausgibt. Kompiliere sie und führe sie aus.";
+        String aufgabe = "Erstelle einen neuen Unterordner 'HelloWorld'. Lege darin eine Datei 'Main.java' an, die 'Hallo Welt aus Java' ausgibt. Kompiliere das Programm in diesem Ordner und führe es dort aus.";
 
         List<Message> messages = new ArrayList<>();
         messages.add(new SystemMessage(SYSTEM_PROMPT));

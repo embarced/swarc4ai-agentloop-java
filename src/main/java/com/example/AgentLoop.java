@@ -1,25 +1,37 @@
 package com.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.theokanning.openai.completion.chat.ChatCompletionRequest;
-import com.theokanning.openai.completion.chat.ChatMessage;
-import com.theokanning.openai.completion.chat.ChatMessageRole;
-import com.theokanning.openai.service.OpenAiService;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.messages.AssistantMessage;
+import org.springframework.ai.chat.messages.Message;
+import org.springframework.ai.chat.messages.SystemMessage;
+import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.openai.OpenAiChatOptions;
+import org.springframework.ai.openai.api.ResponseFormat;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class AgentLoop {
+@SpringBootApplication
+public class AgentLoop implements CommandLineRunner {
 
-    private static final String API_KEY = System.getenv("OPENAI_API_KEY");
     private static final ObjectMapper mapper = new ObjectMapper();
+    private final ChatClient chatClient;
+
+    public AgentLoop(ChatModel chatModel) {
+        this.chatClient = ChatClient.create(chatModel);
+    }
 
     public static String runShell(String command) {
         System.out.println("Führe Shell aus: " + command);
@@ -99,18 +111,16 @@ public class AgentLoop {
             """;
 
     public static void main(String[] args) {
-        if (API_KEY == null) {
-            System.err.println("Bitte setze die Umgebungsvariable OPENAI_API_KEY!");
-            return;
-        }
+        SpringApplication.run(AgentLoop.class, args);
+    }
 
-        OpenAiService service = new OpenAiService(API_KEY, Duration.ofSeconds(60));
-
+    @Override
+    public void run(String... args) {
         String aufgabe = "Erstelle eine Datei 'Main.java', die 'Hallo Welt aus Java' ausgibt. Kompiliere sie und führe sie aus.";
 
-        List<ChatMessage> messages = new ArrayList<>();
-        messages.add(new ChatMessage(ChatMessageRole.SYSTEM.value(), SYSTEM_PROMPT));
-        messages.add(new ChatMessage(ChatMessageRole.USER.value(), "Aufgabe: " + aufgabe));
+        List<Message> messages = new ArrayList<>();
+        messages.add(new SystemMessage(SYSTEM_PROMPT));
+        messages.add(new UserMessage("Aufgabe: " + aufgabe));
 
         System.out.println("Starte Agent...\n");
 
@@ -118,15 +128,16 @@ public class AgentLoop {
         while (steps < 15) {
             steps++;
 
-            // TODO: ÜBUNG 1 - Erstelle einen ChatCompletionRequest mit Modell, Messages und JSON-Response-Format.
-            // TODO: ÜBUNG 1 - Rufe das LLM über den OpenAiService auf und speichere die Antwort als ChatMessage.
+            // TODO: ÜBUNG 1 - Erstelle ein Prompt-Objekt mit der bisherigen Message-History und den OpenAiChatOptions.
+            // TODO: ÜBUNG 1 - Konfiguriere das Modell gpt-4o, temperature 0.1 und JSON_OBJECT als ResponseFormat.
+            // TODO: ÜBUNG 1 - Rufe das LLM über den ChatClient auf und speichere die Antwort als AssistantMessage.
             // TODO: ÜBUNG 1 - Lies den Content aus der LLM-Antwort aus.
+            // TODO: ÜBUNG 1 - Parse den JSON-String mit Jackson in ein AgentAction-Objekt.
+            // TODO: ÜBUNG 1 - Beende den Loop, wenn die Action 'finish' ist.
+            // TODO: ÜBUNG 1 - Füge die Assistant-Antwort und das Tool-Ergebnis wieder zur Message-History hinzu.
             // SO PRÜFST DU ES: Starte das Programm. Der Agent sollte mehrere Schritte ausführen, eine Datei
             // 'Main.java' erzeugen, sie kompilieren und am Ende 'Hallo Welt aus Java' ausgeben.
-            throw new UnsupportedOperationException("ÜBUNG 1: Implementiere den LLM-Aufruf und das Auslesen der Antwort.");
-
+            throw new UnsupportedOperationException("ÜBUNG 1: Implementiere den Spring-AI-Aufruf und das JSON-Parsing.");
         }
-
-        service.shutdownExecutor();
     }
 }

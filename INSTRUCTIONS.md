@@ -42,8 +42,8 @@ git checkout ex1
 Sucht TODOs nach `ÜBUNG 1`.
 
 Inhaltlich:
-- ChatCompletionRequest für den Modellaufruf bauen
-- Antwort vom LLM abrufen
+- Spring-AI-Request mit `Prompt` und `OpenAiChatOptions` bauen
+- Antwort vom LLM über `ChatClient` abrufen
 - JSON-Antwort in `AgentAction` parsen
 - auf `finish` reagieren
 - Tool-Ergebnis wieder in die History zurückschreiben
@@ -65,7 +65,7 @@ git checkout main
 
 ```bash
 mvn -q -DskipTests compile
-mvn -q exec:java
+mvn spring-boot:run
 ```
 
 ## Nützliche Kommandos
@@ -90,7 +90,7 @@ git checkout <branch-name>
 
 ## Wichtige Datei
 - `src/main/java/com/example/AgentLoop.java`
-  - System Prompt, Tool-Methoden, LLM-Aufruf, Loop und History-Update
+  - System Prompt, Tool-Methoden, Spring-AI-Aufruf, Loop und History-Update
 
 ## Abschluss
 Wenn ihr die TODOs in `ex1` gelöst habt, vergleicht mit:

@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: agentic-loop-exercise
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4o
+          temperature: 0.1
+
+logging:
+  level:
+    org.springframework.ai: INFO

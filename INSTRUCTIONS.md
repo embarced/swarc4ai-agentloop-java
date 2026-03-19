@@ -42,10 +42,11 @@ git checkout ex1
 Sucht TODOs nach `ÜBUNG 1`.
 
 Inhaltlich:
-- Spring-AI-Request mit `Prompt` und `OpenAiChatOptions` bauen
-- Antwort vom LLM über `ChatClient` abrufen
 - JSON-Antwort in `AgentAction` parsen
+- den `thought` des Agenten ausgeben
 - auf `finish` reagieren
+- je nach `action` die passende Tool-Methode ausführen
+- unbekannte Actions sinnvoll behandeln
 - Tool-Ergebnis wieder in die History zurückschreiben
 
 Testidee:

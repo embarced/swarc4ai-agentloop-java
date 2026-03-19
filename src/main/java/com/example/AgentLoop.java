@@ -128,16 +128,33 @@ public class AgentLoop implements CommandLineRunner {
         while (steps < 15) {
             steps++;
 
-            // TODO: ÜBUNG 1 - Erstelle ein Prompt-Objekt mit der bisherigen Message-History und den OpenAiChatOptions.
-            // TODO: ÜBUNG 1 - Konfiguriere das Modell gpt-4o, temperature 0.1 und JSON_OBJECT als ResponseFormat.
-            // TODO: ÜBUNG 1 - Rufe das LLM über den ChatClient auf und speichere die Antwort als AssistantMessage.
-            // TODO: ÜBUNG 1 - Lies den Content aus der LLM-Antwort aus.
+            OpenAiChatOptions options = OpenAiChatOptions.builder()
+                    .model("gpt-4o")
+                    .temperature(0.1)
+                    .responseFormat(ResponseFormat.builder()
+                            .type(ResponseFormat.Type.JSON_OBJECT)
+                            .build())
+                    .build();
+
+            Prompt prompt = new Prompt(messages, options);
+            AssistantMessage responseMessage = chatClient.prompt(prompt)
+                    .call()
+                    .chatResponse()
+                    .getResult()
+                    .getOutput();
+            String content = responseMessage.getText();
+
             // TODO: ÜBUNG 1 - Parse den JSON-String mit Jackson in ein AgentAction-Objekt.
-            // TODO: ÜBUNG 1 - Beende den Loop, wenn die Action 'finish' ist.
-            // TODO: ÜBUNG 1 - Füge die Assistant-Antwort und das Tool-Ergebnis wieder zur Message-History hinzu.
+            // TODO: ÜBUNG 1 - Gib den Gedanken des Agenten aus, damit der Loop nachvollziehbar wird.
+            // TODO: ÜBUNG 1 - Beende den Loop sofort, wenn die Action 'finish' ist.
+            // TODO: ÜBUNG 1 - Rufe je nach Action die passende Tool-Methode auf: runShell, readFile oder writeFile.
+            // TODO: ÜBUNG 1 - Behandle unbekannte Actions als Fehlertext.
+            // TODO: ÜBUNG 1 - Gib das Tool-Ergebnis gekürzt auf der Konsole aus.
+            // TODO: ÜBUNG 1 - Füge die Assistant-Antwort und das Tool-Ergebnis wieder zur Message-History hinzu,
+            // damit der Agent im nächsten Schritt auf dem letzten Ergebnis weiterarbeiten kann.
             // SO PRÜFST DU ES: Starte das Programm. Der Agent sollte mehrere Schritte ausführen, eine Datei
-            // 'Main.java' erzeugen, sie kompilieren und am Ende 'Hallo Welt aus Java' ausgeben.
-            throw new UnsupportedOperationException("ÜBUNG 1: Implementiere den Spring-AI-Aufruf und das JSON-Parsing.");
+            // im Ordner 'HelloWorld' erzeugen, sie kompilieren und am Ende 'Hallo Welt aus Java' ausgeben.
+            throw new UnsupportedOperationException("ÜBUNG 1: Implementiere JSON-Parsing, Tool-Routing und History-Update.");
         }
     }
 }

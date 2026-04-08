@@ -11,7 +11,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>de.landtag.agenticloop</groupId>
+    <groupId>de.embarc.ai</groupId>
     <artifactId>agentic-loop-exercise</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Agentic Loop Exercise</name>

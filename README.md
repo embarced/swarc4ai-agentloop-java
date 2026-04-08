@@ -91,7 +91,7 @@ git checkout <branch-name>
 ```
 
 ## Wichtige Datei
-- `src/main/java/com/example/AgentLoop.java`
+- `src/main/java/de/embarc/ai/AgentLoop.java`
   - System Prompt, Tool-Methoden, Spring-AI-Aufruf, Loop, History-Update und Aufgabenstellung
 
 ## Abschluss

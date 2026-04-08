@@ -1,4 +1,4 @@
-package com.example;
+package de.embarc.ai;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.ai.chat.client.ChatClient;

@@ -1,4 +1,4 @@
-# Anleitung für Studierende: Java-Übung "Agentic Loop"
+# Anleitung: Java-Übung "Agentic Loop"
 
 ## Ziel der Übung
 In dieser Übung baut ihr einen einfachen Agentic Loop in Java:
@@ -95,7 +95,7 @@ git checkout <branch-name>
   - System Prompt, Tool-Methoden, Spring-AI-Aufruf, Loop, History-Update und Aufgabenstellung
 
 ## Abschluss
-Wenn ihr die TODOs in `ex1` gelöst habt, vergleicht mit:
+Wenn die TODOs in `ex1` gelöst sind, vergleicht mit:
 
 ```bash
 git checkout main
